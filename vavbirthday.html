@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Vava! ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+      min-height: 100vh;
+      text-align: center;
+      position: relative;
+      z-index: 0;
+    }
+
+    /* Option 3: Image as a full-screen background */
+    .bg-img {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+      filter: brightness(0.6); /* Optional dark overlay */
+    }
+
+    /* Option 2: background-size: contain (Commented out for now) */
+    /*
+    body {
+      background: url('https://i.ibb.co/2108zM5F/IMG-20240615-WA0000.jpg') no-repeat center center fixed;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+    */
+
+    .heart {
+      position: absolute;
+      pointer-events: none;
+      animation: float 6s ease-in-out infinite;
+      opacity: 0.7;
+      font-size: 20px;
+      color: #ff6b6b;
+      z-index: 1;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-100px) rotate(20deg); }
+    }
+
+    header {
+      padding: 50px 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 2s ease;
+    }
+
+    .reveal-btn {
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(5px);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      color: white;
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      margin: 30px auto;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .reveal-btn:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: translateY(-3px);
+    }
+
+    .letter {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 1s ease;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .letter-content {
+      background: #fff;
+      color: #333;
+      max-width: 600px;
+      padding: 40px;
+      border-radius: 10px;
+      position: relative;
+      transform: scale(0.8);
+      transition: transform 0.5s ease;
+      text-align: left;
+      line-height: 1.8;
+      overflow-y: auto;
+      max-height: 80vh;
+    }
+
+    .letter.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .letter.show .letter-content {
+      transform: scale(1);
+    }
+
+    .close-letter {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .letter-title {
+      font-family: 'Dancing Script', cursive;
+      color: #d32f2f;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 2rem;
+    }
+
+    .letter-text {
+      margin-bottom: 20px;
+    }
+
+    .letter-signature {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      color: #d32f2f;
+      text-align: right;
+      margin-top: 30px;
+    }
+
+    .music-player {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.3);
+      padding: 10px;
+      border-radius: 50%;
+      z-index: 100;
+      cursor: pointer;
+      backdrop-filter: blur(2px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      .letter-content { padding: 20px; max-width: 90%; }
+      .letter-title { font-size: 1.8rem; }
+      .reveal-btn { padding: 12px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Option 3: Fullscreen Background Image -->
+  <img class="bg-img" src="https://i.ibb.co/2108zM5F/IMG-20240615-WA0000.jpg" alt="Background" />
+
+  <div id="hearts-container"></div>
+
+  <header>
+    <h1>Happy Birthday Vava! ❤️</h1>
+    <button class="reveal-btn" id="revealBtn">Click here to reveal your birthday letter</button>
+  </header>
+
+  <!-- Hidden Letter -->
+    <div class="letter" id="letter">
+        <div class="letter-content">
+            <button class="close-letter" id="closeLetter">×</button>
+            <h2 class="letter-title">To My Beautiful Vava,</h2>
+            
+            <div class="letter-text">
+                <p>Hey Love, the day is finally here, I know you were not at all looking forward to it but you don't know how much this day means to me. Happiest Birthday Vava, you're the best thing that has ever happened to me. You're 22 now and its just the start to the amazing life that is yet to come.</p>
+                
+                <p>You have made me realise that having someone like you in their lives is no less than a blessing. I always thought I was perfect but being with you has made me realise there is much more to life than being a nerd. You have shown me what emotions are and how to become a person who values the other person's feelings.</p>
+                
+                <p>Although I was always been slow in understanding and recognizing your emotions, the love for me in you has always grown day by day. I respect you more than anyone in life and I will always be grateful to be able to talk to you everyday.</p>
+                
+                <p>I have hurted you multiple times and when you needed me I was not there, there is no bigger regret that I feel as I am writing this. I know I am not someone that you deserve, I will keep loving you till the end of my life.</p>
+                
+                <p>As bad as it sounds coming from me, I want to make this work and I am willing to do anything that makes it work. At the same time, I do respect your every decision and I am ready to be in whatever terms you keep me in your life.</p>
+                
+                <p>I pray to god that you get all the happiness that you deserve and all your dreams come true. I really hope that you feel good at all times and you have the brightest future (in other worlds you become the baap of all Ambanis, Adanis and Tatas).</p>
+                
+                <p>Happy Birthday once again. I was gonna come but it was not possible for me, I'm very sorry. I will meet you tomorrow and I hope that you feel happy when you finally see what I have got for you. Until then, enjoy your day vav. I will always be here to support you.</p>
+            </div>
+            
+            <div class="letter-signature">
+                I love you forever and ever,<br>
+                Your Atlas
+            </div>
+        </div>
+    </div>
+
+
+  <div class="music-player" onclick="toggleMusic()">
+    <span id="music-icon">🎵</span>
+  </div>
+
+  <audio id="birthdaySong" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Floating hearts
+    function createHearts() {
+      const container = document.getElementById('hearts-container');
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = Math.random() * 100 + 'vh';
+        heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+        heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        container.appendChild(heart);
+      }
+    }
+
+    const revealBtn = document.getElementById('revealBtn');
+    const letter = document.getElementById('letter');
+    const closeLetter = document.getElementById('closeLetter');
+
+    revealBtn.addEventListener('click', () => {
+      letter.classList.add('show');
+    });
+
+    closeLetter.addEventListener('click', () => {
+      letter.classList.remove('show');
+    });
+
+    const audio = document.getElementById('birthdaySong');
+    let isPlaying = false;
+
+    function toggleMusic() {
+      if (isPlaying) {
+        audio.pause();
+        document.getElementById('music-icon').textContent = '🔇';
+      } else {
+        audio.play();
+        document.getElementById('music-icon').textContent = '🎵';
+      }
+      isPlaying = !isPlaying;
+    }
+
+    window.onload = function() {
+      createHearts();
+      audio.volume = 0.5;
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          document.getElementById('music-icon').textContent = '▶️';
+          isPlaying = false;
+        });
+      }
+    };
+  </script>
+</body>
+</html>
